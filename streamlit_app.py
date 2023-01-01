@@ -37,7 +37,7 @@ try:
 
     #df = get_data_from_db()
     def get_data_from_excel():
-    df = pd.read_excel(
+        df = pd.read_excel(
         io="Employees.xlsx",
         engine="openpyxl",
         sheet_name="Sheet1"
