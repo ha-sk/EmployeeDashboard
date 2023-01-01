@@ -2,10 +2,11 @@ import base64
 
 import streamlit as st
 import pandas as pd
-import pyodbc
+#import pyodbc
 import numpy as np
 import time
 import plotly.express as px  # pip install plotly-express
+import  openpyxl
 
 try:
     st.set_page_config(layout='wide', initial_sidebar_state='expanded')
@@ -16,25 +17,33 @@ try:
 
     # ---- READ ----
 
-    def sql_connection():
-        database = pyodbc.connect('Driver={SQL Server};'
-                                  'Server=HAFIDA\SQLSERVER19;'
-                                  'Database=FDB;'
-                                  'Trusted_Connection=yes;')
-        return database
+    #def sql_connection():
+        #database = pyodbc.connect('Driver={SQL Server};'
+                                  #'Server=HAFIDA\SQLSERVER19;'
+                                  #'Database=FDB;'
+                                  #'Trusted_Connection=yes;')
+        #return database
 
 
-    cursor = sql_connection().cursor()
+    #cursor = sql_connection().cursor()
 
 
-    def get_data_from_db():
+    #def get_data_from_db():
         # Executing a SQL Query
-        query = "SELECT * FROM Employees"
-        df = pd.read_sql(query, sql_connection())
-        return df
+        #query = "SELECT * FROM Employees"
+        #df = pd.read_sql(query, sql_connection())
+        #return df
 
 
-    df = get_data_from_db()
+    #df = get_data_from_db()
+    def get_data_from_excel():
+    df = pd.read_excel(
+        io="Employees.xlsx",
+        engine="openpyxl",
+        sheet_name="Sheet1"
+    )
+    return df
+    df = get_data_from_excel()
 
     df2 = pd.DataFrame(df['HireDate'].dt.year.value_counts().reset_index().values, columns=["Year", "Hired"])
     df2 = df2.sort_values(by=['Year'])
