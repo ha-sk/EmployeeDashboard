@@ -42,7 +42,7 @@ try:
         engine="openpyxl",
         sheet_name="Sheet1"
     )
-    return df
+        return df
     df = get_data_from_excel()
 
     df2 = pd.DataFrame(df['HireDate'].dt.year.value_counts().reset_index().values, columns=["Year", "Hired"])
