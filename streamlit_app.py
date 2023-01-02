@@ -44,6 +44,7 @@ try:
     )
         return df
     df = get_data_from_excel()
+    df = df.drop('Unnamed: 0', axis = 1)
 
     df2 = pd.DataFrame(df['HireDate'].dt.year.value_counts().reset_index().values, columns=["Year", "Hired"])
     df2 = df2.sort_values(by=['Year'])
